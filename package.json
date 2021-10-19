@@ -1,6 +1,6 @@
 {
-  "name": "@uniswap/interface",
-  "description": "Uniswap Interface",
+  "name": "tetu-swap",
+  "description": "TetuSwap interface",
   "homepage": ".",
   "private": true,
   "devDependencies": {
@@ -115,7 +115,7 @@
       "last 1 safari version"
     ]
   },
-  "license": "GPL-3.0-or-later",
+  "license": "ISC",
   "dependencies": {
     "@ethersproject/address": "^5.4.0",
     "@uniswap/default-token-list": "^2.0.0",
