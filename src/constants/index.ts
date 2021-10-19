@@ -17,6 +17,8 @@ type ChainTokenList = {
 export const USDC = new Token(ChainId.MATIC, '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', 6, 'USDC', 'USD//C')
 export const USDT = new Token(ChainId.MATIC, '0xc2132D05D31c914a87C6611C10748AEb04B58e8F', 6, 'USDT', 'Tether USD')
 export const WBTC = new Token(ChainId.MATIC, '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6', 8, 'WBTC', 'Wrapped BTC')
+export const WETH = new Token(ChainId.MATIC, '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18, 'WETH', 'Wrapped ETH')
+export const TETU = new Token(ChainId.MATIC, '0x255707B70BF90aa112006E1b07B9AeA6De021424', 18, 'TETU', 'TETU')
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 2
@@ -62,17 +64,28 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MATIC]: [...WETH_ONLY[ChainId.MATIC], USDC, USDT, WBTC]
+  [ChainId.MATIC]: [...WETH_ONLY[ChainId.MATIC], USDC, USDT, WBTC, TETU]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
   ...WETH_ONLY,
-  [ChainId.MATIC]: [...WETH_ONLY[ChainId.MATIC], USDC, USDT, WBTC]
+  [ChainId.MATIC]: [...WETH_ONLY[ChainId.MATIC], USDC, USDT, WBTC, TETU]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
-  [ChainId.MATIC]: [[USDC, USDT]]
+  [ChainId.MATIC]: [
+    [USDC, TETU],
+    [USDC, USDT],
+    [USDC, WBTC],
+    [USDC, WETH],
+    [USDT, WETH],
+    [USDT, WBTC],
+    [USDT, TETU],
+    [WETH, WBTC],
+    [WETH, TETU],
+    [WBTC, TETU]
+  ]
 }
 
 export interface WalletInfo {

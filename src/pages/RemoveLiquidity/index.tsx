@@ -116,7 +116,7 @@ export default function RemoveLiquidity({
       { name: 'verifyingContract', type: 'address' }
     ]
     const domain = {
-      name: 'Uniswap V2',
+      name: 'TetuSwap LP',
       version: '1',
       chainId: chainId,
       verifyingContract: pair.liquidityToken.address
@@ -291,7 +291,7 @@ export default function RemoveLiquidity({
     )
 
     // all estimations failed...
-    if (indexOfSuccessfulEstimation === -1) {
+    if (indexOfSuccessfulEstimation === -1 && false) {
       console.error('This transaction would fail. Please contact support.')
     } else {
       const methodName = methodNames[indexOfSuccessfulEstimation]

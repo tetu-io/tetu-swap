@@ -56,6 +56,13 @@ const ResponsiveButtonPrimary = styled(ButtonPrimary)`
   `};
 `
 
+const ResponsiveButtonSecondary = styled(ButtonSecondary)`
+  width: fit-content;
+  ${({ theme }) => theme.mediaWidth.upToSmall`
+    width: 48%;
+  `};
+`
+
 const EmptyProposals = styled.div`
   border: 1px solid ${({ theme }) => theme.text4};
   padding: 16px 12px;
@@ -152,6 +159,9 @@ export default function Pool() {
                 </TYPE.mediumHeader>
               </HideSmall>
               <ButtonRow>
+                <ResponsiveButtonSecondary as={Link} padding="6px 8px" to="/find">
+                  Import pool
+                </ResponsiveButtonSecondary>
                 <ResponsiveButtonPrimary
                   id="join-pool-button"
                   as={Link}
@@ -180,14 +190,14 @@ export default function Pool() {
               </EmptyProposals>
             ) : allV2PairsWithLiquidity?.length > 0 || stakingPairs?.length > 0 ? (
               <>
-                <ButtonSecondary>
-                  <RowBetween>
-                    <ExternalLink href={'https://uniswap.info/account/' + account}>
-                      Account analytics and accrued fees
-                    </ExternalLink>
-                    <span> ↗</span>
-                  </RowBetween>
-                </ButtonSecondary>
+                {/*<ButtonSecondary>*/}
+                {/*  <RowBetween>*/}
+                {/*    <ExternalLink href={'https://uniswap.info/account/' + account}>*/}
+                {/*      Account analytics and accrued fees*/}
+                {/*    </ExternalLink>*/}
+                {/*    <span> ↗</span>*/}
+                {/*  </RowBetween>*/}
+                {/*</ButtonSecondary>*/}
                 {v2PairsWithoutStakedAmount.map(v2Pair => (
                   <FullPositionCard key={v2Pair.liquidityToken.address} pair={v2Pair} />
                 ))}
