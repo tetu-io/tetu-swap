@@ -19,7 +19,6 @@ import Menu from '../Menu'
 
 import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
-import ClaimModal from '../claim/ClaimModal'
 
 const HeaderFrame = styled.div`
   display: grid;
@@ -223,31 +222,21 @@ export const StyledMenuButton = styled.button`
   }
 `
 
-const NETWORK_LABELS: { [chainId in ChainId]?: string } = {
-  [ChainId.RINKEBY]: 'Rinkeby',
-  [ChainId.ROPSTEN]: 'Ropsten',
-  [ChainId.GÖRLI]: 'Görli',
-  [ChainId.KOVAN]: 'Kovan'
-}
+const NETWORK_LABELS: { [chainId in ChainId]?: string } = {}
 
 export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   const { t } = useTranslation()
 
   const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
-  // const [isDark] = useDarkModeManager()
   const [darkMode, toggleDarkMode] = useDarkModeManager()
 
   return (
     <HeaderFrame>
-      <ClaimModal />
-      {/*<Modal isOpen={showUniBalanceModal} onDismiss={() => setShowUniBalanceModal(false)}>*/}
-      {/*  <UniBalanceContent setShowUniBalanceModal={setShowUniBalanceModal} />*/}
-      {/*</Modal>*/}
       <HeaderRow>
         <Title href=".">
           <UniIcon>
-            <img width={'24px'} src={darkMode ? LogoDark : Logo} alt="logo" />
+            <img width={'50px'} src={darkMode ? LogoDark : Logo} alt="logo" />
           </UniIcon>
         </Title>
         <HeaderLinks>
@@ -267,15 +256,6 @@ export default function Header() {
           >
             {t('pool')}
           </StyledNavLink>
-          {/*<StyledNavLink id={`stake-nav-link`} to={'/uni'}>*/}
-          {/*  UNI*/}
-          {/*</StyledNavLink>*/}
-          {/*<StyledNavLink id={`stake-nav-link`} to={'/vote'}>*/}
-          {/*  Vote*/}
-          {/*</StyledNavLink>*/}
-          {/*<StyledExternalLink id={`stake-nav-link`} href={'https://uniswap.info'}>*/}
-          {/*  Charts <span style={{ fontSize: '11px' }}>↗</span>*/}
-          {/*</StyledExternalLink>*/}
         </HeaderLinks>
       </HeaderRow>
       <HeaderControls>
@@ -288,7 +268,7 @@ export default function Header() {
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                {userEthBalance?.toSignificant(4)} ETH
+                {userEthBalance?.toSignificant(4)} MATIC
               </BalanceText>
             ) : null}
             <Web3Status />

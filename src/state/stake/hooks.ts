@@ -18,7 +18,7 @@ export const STAKING_REWARDS_INFO: {
     stakingRewardAddress: string
   }[]
 } = {
-  [ChainId.MAINNET]: []
+  [ChainId.MATIC]: []
 }
 
 export interface StakingInfo {

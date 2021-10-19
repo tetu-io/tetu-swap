@@ -1,0 +1,25 @@
+{
+  "name": "TetuSwap Default List",
+  "timestamp": "2021-10-01T23:57:10.982Z",
+  "version": {
+    "major": 1,
+    "minor": 0,
+    "patch": 0
+  },
+  "tags": {},
+  "logoURI": "ipfs://QmNa8mQkrNKp1WEEeGjFezDmDeodkWRevGFN8JCV7b4Xir",
+  "keywords": [
+    "tetu",
+    "default"
+  ],
+  "tokens": [
+    {
+      "chainId": 137,
+      "address": "0x255707B70BF90aa112006E1b07B9AeA6De021424",
+      "name": "TETU Reward Token",
+      "symbol": "TETU",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/17882/small/gradient_icon_926.png"
+    }
+  ]
+}
