@@ -32,7 +32,7 @@ export function useSwapActionHandlers(): {
       dispatch(
         selectCurrency({
           field,
-          currencyId: currency instanceof Token ? currency.address : currency === MATIC ? 'ETH' : ''
+          currencyId: currency instanceof Token ? currency.address : currency === MATIC ? 'MATIC' : ''
         })
       )
     },

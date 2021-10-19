@@ -43,14 +43,9 @@ export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
 // TODO: specify merkle distributor for mainnet
 export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {}
 
-const WETH_ONLY: ChainTokenList = {
-  [ChainId.MATIC]: [WMATIC[ChainId.MATIC]]
-}
-
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  ...WETH_ONLY,
-  [ChainId.MATIC]: [...WETH_ONLY[ChainId.MATIC], USDC, USDT, WBTC]
+  [ChainId.MATIC]: [WMATIC[ChainId.MATIC], WETH, USDC, USDT, WBTC]
 }
 
 /**
@@ -63,14 +58,12 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  ...WETH_ONLY,
-  [ChainId.MATIC]: [...WETH_ONLY[ChainId.MATIC], USDC, USDT, WBTC, TETU]
+  [ChainId.MATIC]: [WMATIC[ChainId.MATIC], WETH, USDC, USDT, WBTC, TETU]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-  ...WETH_ONLY,
-  [ChainId.MATIC]: [...WETH_ONLY[ChainId.MATIC], USDC, USDT, WBTC, TETU]
+  [ChainId.MATIC]: [WETH, WMATIC[ChainId.MATIC], USDC, USDT, WBTC, TETU]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
