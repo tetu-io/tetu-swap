@@ -354,7 +354,7 @@ export default function AddLiquidity({
                     <AutoColumn gap="10px">
                       <TYPE.link fontWeight={400} color={'primaryText1'}>
                         <b>Tip:</b> When you add liquidity, you will receive pool tokens representing your position.
-                        These tokens should be deposited on the Tetu yield platform for earn rewards
+                        These tokens should be deposited on the Tetu yield platform to earn rewards
                       </TYPE.link>
                     </AutoColumn>
                   </BlueCard>
