@@ -183,7 +183,6 @@ export function useSwapCallback(
         } = swapCalls[0]
 
         return contract[methodName](...args, {
-          gasLimit: 19_000_000,
           ...(value && !isZero(value) ? { value, from: account } : { from: account })
         })
           .then((response: any) => {

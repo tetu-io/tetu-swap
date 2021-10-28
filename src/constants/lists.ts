@@ -1,7 +1,4 @@
 // used to mark unsupported tokens, these are hosted lists of unsupported tokens
-/**
- * @TODO add list from blockchain association
- */
 export const UNSUPPORTED_LIST_URLS: string[] = []
 
 const SUSHI_LIST = 'https://raw.githubusercontent.com/sushiswap/default-token-list/master/tokens/matic.json'
