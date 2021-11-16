@@ -1,7 +1,7 @@
-import { ChainId, JSBI, Percent, Token, WMATIC } from '../sdk'
-import { AbstractConnector } from '@web3-react/abstract-connector'
+import {ChainId, JSBI, Percent, Token, WMATIC} from '../sdk'
+import {AbstractConnector} from '@web3-react/abstract-connector'
 
-import { fortmatic, injected, portis } from '../connectors'
+import {injected} from '../connectors'
 
 export const ROUTER_ADDRESS = '0x121d1D47aC63fAF123b29E3267fa8feb1fADc65c'
 
@@ -19,6 +19,7 @@ export const USDT = new Token(ChainId.MATIC, '0xc2132D05D31c914a87C6611C10748AEb
 export const WBTC = new Token(ChainId.MATIC, '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6', 8, 'WBTC', 'Wrapped BTC')
 export const WETH = new Token(ChainId.MATIC, '0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619', 18, 'WETH', 'Wrapped ETH')
 export const TETU = new Token(ChainId.MATIC, '0x255707B70BF90aa112006E1b07B9AeA6De021424', 18, 'TETU', 'TETU')
+export const DINO = new Token(ChainId.MATIC, '0xAa9654BECca45B5BDFA5ac646c939C62b527D394', 18, 'DINO', 'DINO')
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 2
@@ -76,7 +77,8 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [USDT, TETU],
     [WETH, WBTC],
     [WETH, TETU],
-    [WBTC, TETU]
+    [WBTC, TETU],
+    [DINO, USDC]
   ]
 }
 
@@ -109,33 +111,6 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     description: 'Easy-to-use browser extension.',
     href: null,
     color: '#E8831D'
-  },
-  COINBASE_LINK: {
-    name: 'Open in Coinbase Wallet',
-    iconName: 'coinbaseWalletIcon.svg',
-    description: 'Open in Coinbase Wallet app.',
-    href: 'https://go.cb-w.com/mtUDhEZPy1',
-    color: '#315CF5',
-    mobile: true,
-    mobileOnly: true
-  },
-  FORTMATIC: {
-    connector: fortmatic,
-    name: 'Fortmatic',
-    iconName: 'fortmaticIcon.png',
-    description: 'Login using Fortmatic hosted wallet',
-    href: null,
-    color: '#6748FF',
-    mobile: true
-  },
-  Portis: {
-    connector: portis,
-    name: 'Portis',
-    iconName: 'portisIcon.png',
-    description: 'Login using Portis hosted wallet',
-    href: null,
-    color: '#4A6C9B',
-    mobile: true
   }
 }
 
@@ -172,3 +147,22 @@ export const ONE_HUNDRED_PERCENT = new Percent('1')
 
 // SDN OFAC addresses
 export const BLOCKED_ADDRESSES: string[] = []
+
+export const STATIC_PAIRS = new Map<string, string>([
+  [USDC.address.toLowerCase() + USDT.address.toLowerCase(), '0x0A1970792114AAa40611B95988b24644583E7d3C'],
+  [TETU.address.toLowerCase() + USDC.address.toLowerCase(), '0x80fF4e4153883d770204607eb4aF9994739C72DC'],
+  [USDC.address.toLowerCase() + WETH.address.toLowerCase(), '0xad13Ad855FcAc6ffe6dbBa9362873228937Fba53'],
+  [WBTC.address.toLowerCase() + WETH.address.toLowerCase(), '0x6Ee1488EA68d93b81Fc255c166E21739c71588ce'],
+  [WETH.address.toLowerCase() + USDT.address.toLowerCase(), '0xeaCa9208121D1b5AA80eBA2fecb2f0017841265f'],
+  [WBTC.address.toLowerCase() + USDC.address.toLowerCase(), '0xA2Ac987AF47CC54250fAE6b8b8f0742E8C531d74'],
+  [WBTC.address.toLowerCase() + USDT.address.toLowerCase(), '0xF9875C63bae047FC819A3c2351CAf2A4B957851a'],
+  [WBTC.address.toLowerCase() + TETU.address.toLowerCase(), '0x13edEdc25bCA247250b93C6EAB0291C44273ceB1'],
+  [TETU.address.toLowerCase() + USDT.address.toLowerCase(), '0xCA522CD609F7187C67C8B97bE0a3A3259e7BB6FF'],
+  [TETU.address.toLowerCase() + WETH.address.toLowerCase(), '0x8c9D7b1c0dAD06166Ef643Dbb75DEF0913Fe5760'],
+  [WMATIC[137].address.toLowerCase() + WETH.address.toLowerCase(), '0xbC7b96467F4e33B943ecD999432055127f600B61'],
+  [WMATIC[137].address.toLowerCase() + USDC.address.toLowerCase(), '0xF85aC8afF5aD22C745Bfca07d65FbCdE67A04C90'],
+  [WMATIC[137].address.toLowerCase() + WBTC.address.toLowerCase(), '0xa6eaf9F1d3Af45c68417679D5204dd808E5B3C47'],
+  [WMATIC[137].address.toLowerCase() + USDT.address.toLowerCase(), '0x5a218e3a6C571C161e9cdBEDcF699e219B737A67'],
+  [WMATIC[137].address.toLowerCase() + TETU.address.toLowerCase(), '0x0196959958d923F2854E684B1694fb9B2d17AeE9'],
+  [USDC.address.toLowerCase() + DINO.address.toLowerCase(), '0xEFeAe25C62574e2652B24E6215000c2C7a2473aB']
+])
