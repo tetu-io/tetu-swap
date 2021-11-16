@@ -60,6 +60,14 @@
       "decimals": 18,
       "chainId": 137,
       "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/polygon.jpg"
+    },
+    {
+      "name": "DinoSwap (PoS)",
+      "address": "0xAa9654BECca45B5BDFA5ac646c939C62b527D394",
+      "symbol": "DINO",
+      "decimals": 18,
+      "chainId": 137,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/dino.jpg"
     }
   ]
 }
