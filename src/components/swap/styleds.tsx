@@ -135,6 +135,7 @@ export function SwapCallbackError({ error }: { error: string }) {
         <AlertTriangle size={24} />
       </SwapCallbackErrorInnerAlertTriangle>
       <p>{error}</p>
+      {/*  TODO if error contains 'Pair need to sync' show button for call sync()*/}
     </SwapCallbackErrorInner>
   )
 }

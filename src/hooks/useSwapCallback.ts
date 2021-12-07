@@ -214,6 +214,13 @@ export function useSwapCallback(
             } else {
               // otherwise, the error was unexpected and we need to convey that
               console.error(`Swap failed`, error, methodName, args, value)
+              if (error.data?.message) {
+                const msg: string = error.data?.message
+                if (msg.indexOf('TSP: K too low') !== -1) {
+                  throw new Error(`Swap failed: Pair need to sync`)
+                }
+                throw new Error(`Swap failed: ${msg}`)
+              }
               throw new Error(`Swap failed: ${error.message}`)
             }
           })

@@ -478,7 +478,7 @@ export default function Swap() {
                 <ProgressSteps steps={[approval === ApprovalState.APPROVED]} />
               </Column>
             )}
-            {isExpertMode && swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
+            {swapErrorMessage ? <SwapCallbackError error={swapErrorMessage} /> : null}
           </BottomGrouping>
         </Wrapper>
       </AppBody>
