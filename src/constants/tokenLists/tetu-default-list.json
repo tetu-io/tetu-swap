@@ -68,6 +68,22 @@
       "decimals": 18,
       "chainId": 137,
       "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/dino.jpg"
+    },
+    {
+      "name": "miFARM",
+      "address": "0xab0b2ddB9C7e440fAc8E140A89c0dbCBf2d7Bbff",
+      "symbol": "miFARM",
+      "decimals": 18,
+      "chainId": 137,
+      "logoURI": "https://assets.coingecko.com/coins/images/14472/small/ifarm.png?1616389133"
+    },
+    {
+      "name": "ICE",
+      "address": "0x4A81f8796e0c6Ad4877A51C86693B0dE8093F2ef",
+      "symbol": "ICE",
+      "decimals": 18,
+      "chainId": 137,
+      "logoURI": "https://cdn.discordapp.com/attachments/794129085387374592/862637810138087434/5.png"
     }
   ]
 }
