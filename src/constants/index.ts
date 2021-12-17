@@ -22,6 +22,8 @@ export const TETU = new Token(ChainId.MATIC, '0x255707B70BF90aa112006E1b07B9AeA6
 export const DINO = new Token(ChainId.MATIC, '0xAa9654BECca45B5BDFA5ac646c939C62b527D394', 18, 'DINO', 'DINO')
 export const miFARM = new Token(ChainId.MATIC, '0xab0b2ddB9C7e440fAc8E140A89c0dbCBf2d7Bbff', 18, 'miFARM', 'miFARM')
 export const ICE = new Token(ChainId.MATIC, '0x4A81f8796e0c6Ad4877A51C86693B0dE8093F2ef', 18, 'ICE', 'ICE')
+export const DAI = new Token(ChainId.MATIC, '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', 18, 'DAI', 'DAI')
+export const KLIMA = new Token(ChainId.MATIC, '0x4e78011ce80ee02d2c3e649fb657e45898257815', 18, 'KLIMA', 'KLIMA')
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 2
@@ -80,7 +82,9 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [WETH, WBTC],
     [WETH, TETU],
     [WBTC, TETU],
-    [DINO, USDC]
+    [DINO, USDC],
+    [DAI, USDC],
+    [KLIMA, USDC]
   ]
 }
 
@@ -168,5 +172,7 @@ export const STATIC_PAIRS = new Map<string, string>([
   [WMATIC[137].address.toLowerCase() + TETU.address.toLowerCase(), '0x0196959958d923F2854E684B1694fb9B2d17AeE9'],
   [USDC.address.toLowerCase() + DINO.address.toLowerCase(), '0xEFeAe25C62574e2652B24E6215000c2C7a2473aB'],
   [USDC.address.toLowerCase() + miFARM.address.toLowerCase(), '0x6af88bD9f7288CF55B430C9AECC03849F2E7b791'],
-  [USDC.address.toLowerCase() + ICE.address.toLowerCase(), '0x84D25fB747559c78314C26917A925C894116EA3C']
+  [USDC.address.toLowerCase() + ICE.address.toLowerCase(), '0x84D25fB747559c78314C26917A925C894116EA3C'],
+  [USDC.address.toLowerCase() + DAI.address.toLowerCase(), '0x37799b48443751eBc0FD2cb4E3Ac119AD97d084b'],
+  [USDC.address.toLowerCase() + KLIMA.address.toLowerCase(), '0xD4Ed96a3EeCe1C7B7A8Fa8A762281e3ED5402f76']
 ])

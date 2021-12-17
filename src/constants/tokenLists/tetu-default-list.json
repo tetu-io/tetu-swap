@@ -84,6 +84,22 @@
       "decimals": 18,
       "chainId": 137,
       "logoURI": "https://cdn.discordapp.com/attachments/794129085387374592/862637810138087434/5.png"
+    },
+    {
+      "name": "DAI",
+      "address": "0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063",
+      "symbol": "DAI",
+      "decimals": 18,
+      "chainId": 137,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/dai.jpg"
+    },
+    {
+      "name": "KLIMA",
+      "address": "0x4e78011ce80ee02d2c3e649fb657e45898257815",
+      "symbol": "KLIMA",
+      "decimals": 18,
+      "chainId": 137,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/logos/main/network/matic/0x4e78011Ce80ee02d2c3e649Fb657E45898257815.jpg"
     }
   ]
 }
