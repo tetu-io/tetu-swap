@@ -97,7 +97,7 @@
       "name": "KLIMA",
       "address": "0x4e78011ce80ee02d2c3e649fb657e45898257815",
       "symbol": "KLIMA",
-      "decimals": 18,
+      "decimals": 9,
       "chainId": 137,
       "logoURI": "https://raw.githubusercontent.com/sushiswap/logos/main/network/matic/0x4e78011Ce80ee02d2c3e649Fb657E45898257815.jpg"
     }
