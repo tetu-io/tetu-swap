@@ -18,7 +18,8 @@ export function isAddress(value: any): string | false {
 }
 
 const ETHERSCAN_PREFIXES: { [chainId in ChainId]: string } = {
-  137: 'matic'
+  137: 'matic',
+  250: 'fantom'
 }
 
 export function getEtherscanLink(
@@ -29,6 +30,8 @@ export function getEtherscanLink(
   let prefix = ''
   if (ETHERSCAN_PREFIXES[chainId] === 'matic') {
     prefix = 'https://polygonscan.com'
+  } else if (ETHERSCAN_PREFIXES[chainId] === 'fantom') {
+    prefix = 'https://ftmscan.com'
   }
 
   switch (type) {

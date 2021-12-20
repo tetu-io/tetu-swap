@@ -14,6 +14,7 @@ type ChainTokenList = {
   readonly [chainId in ChainId]: Token[]
 }
 
+// *** MATIC
 export const USDC = new Token(ChainId.MATIC, '0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174', 6, 'USDC', 'USD//C')
 export const USDT = new Token(ChainId.MATIC, '0xc2132D05D31c914a87C6611C10748AEb04B58e8F', 6, 'USDT', 'Tether USD')
 export const WBTC = new Token(ChainId.MATIC, '0x1BFD67037B42Cf73acF2047067bd4F2C47D9BfD6', 8, 'WBTC', 'Wrapped BTC')
@@ -24,6 +25,21 @@ export const miFARM = new Token(ChainId.MATIC, '0xab0b2ddB9C7e440fAc8E140A89c0db
 export const ICE = new Token(ChainId.MATIC, '0x4A81f8796e0c6Ad4877A51C86693B0dE8093F2ef', 18, 'ICE', 'ICE')
 export const DAI = new Token(ChainId.MATIC, '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', 18, 'DAI', 'DAI')
 export const KLIMA = new Token(ChainId.MATIC, '0x4e78011ce80ee02d2c3e649fb657e45898257815', 18, 'KLIMA', 'KLIMA')
+
+// *** FANTOM
+export const FANTOM_USDC = new Token(ChainId.FANTOM, '0x04068da6c83afcfa0e13ba15a6696662335d5b75', 6, 'USDC', 'USD//C')
+export const FANTOM_FUSDT = new Token(ChainId.FANTOM, '0x049d68029688eabf473097a2fc38ef61633a3c7a', 6, 'fUSDT', 'fTether USD')
+export const FANTOM_WBTC = new Token(ChainId.FANTOM, '0x321162cd933e2be498cd2267a90534a804051b11', 8, 'WBTC', 'Wrapped BTC')
+export const FANTOM_WETH = new Token(ChainId.FANTOM, '0x74b23882a30290451a17c44f4f05243b6b58c76d', 18, 'WETH', 'Wrapped ETH')
+export const FANTOM_TETU = new Token(ChainId.FANTOM, '0x65c9d9d080714cDa7b5d58989Dc27f897F165179', 18, 'TETU', 'TETU')
+export const FANTOM_DAI = new Token(ChainId.FANTOM, '0x8d11ec38a3eb5e956b052f67da8bdc9bef8abf3e', 18, 'DAI', 'DAI')
+export const FANTOM_CRV = new Token(ChainId.FANTOM, '0x1E4F97b9f9F913c46F1632781732927B9019C68b', 18, 'CRV', 'CRV')
+export const FANTOM_FUSD = new Token(ChainId.FANTOM, '0xAd84341756Bf337f5a0164515b1f6F993D194E1f', 18, 'FUSD', 'FUSD')
+export const FANTOM_LINK = new Token(ChainId.FANTOM, '0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8', 18, 'LINK', 'LINK')
+export const FANTOM_FRAX = new Token(ChainId.FANTOM, '0xdc301622e621166BD8E82f2cA0A26c13Ad0BE355', 18, 'FRAX', 'FRAX')
+export const FANTOM_DOLA = new Token(ChainId.FANTOM, '0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c', 18, 'DOLA', 'DOLA')
+export const FANTOM_MIM = new Token(ChainId.FANTOM, '0x82f0B8B456c1A451378467398982d4834b6829c1', 18, 'MIM', 'MIM')
+export const FANTOM_TUSD = new Token(ChainId.FANTOM, '0x9879aBDea01a879644185341F7aF7d8343556B7a', 18, 'TUSD', 'TUSD')
 
 // Block time here is slightly higher (~1s) than average in order to avoid ongoing proposals past the displayed time
 export const AVERAGE_BLOCK_TIME_IN_SECS = 2
@@ -36,20 +52,16 @@ export const TIMELOCK_ADDRESS = '0x1a9C8182C09F50C8318d769245beA52c32BE35BC'
 
 const UNI_ADDRESS = '0x1f9840a85d5aF5bf1D1762F925BDADdC4201F984'
 export const UNI: { [chainId in ChainId]: Token } = {
-  [ChainId.MATIC]: new Token(ChainId.MATIC, UNI_ADDRESS, 18, 'UNI', 'Uniswap')
-}
-
-export const COMMON_CONTRACT_NAMES: { [address: string]: string } = {
-  [UNI_ADDRESS]: 'UNI',
-  [GOVERNANCE_ADDRESS]: 'Governance',
-  [TIMELOCK_ADDRESS]: 'Timelock'
+  [ChainId.MATIC]: new Token(ChainId.MATIC, UNI_ADDRESS, 18, 'UNI', 'Uniswap'),
+  [ChainId.FANTOM]: new Token(ChainId.MATIC, UNI_ADDRESS, 18, 'UNI', 'Uniswap')
 }
 
 export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {}
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  [ChainId.MATIC]: [WMATIC[ChainId.MATIC], WETH, USDC, USDT, WBTC]
+  [ChainId.MATIC]: [WMATIC[ChainId.MATIC], WETH, USDC, USDT, WBTC],
+  [ChainId.FANTOM]: [WMATIC[ChainId.FANTOM], FANTOM_WETH, FANTOM_USDC, FANTOM_FUSDT, FANTOM_WBTC]
 }
 
 /**
@@ -62,12 +74,14 @@ export const CUSTOM_BASES: { [chainId in ChainId]?: { [tokenAddress: string]: To
 
 // used for display in the default list when adding liquidity
 export const SUGGESTED_BASES: ChainTokenList = {
-  [ChainId.MATIC]: [WMATIC[ChainId.MATIC], WETH, USDC, USDT, WBTC, TETU]
+  [ChainId.MATIC]: [WMATIC[ChainId.MATIC], WETH, USDC, USDT, WBTC, TETU],
+  [ChainId.FANTOM]: [WMATIC[ChainId.FANTOM], FANTOM_WETH, FANTOM_USDC, FANTOM_FUSDT, FANTOM_WBTC]
 }
 
 // used to construct the list of all pairs we consider by default in the frontend
 export const BASES_TO_TRACK_LIQUIDITY_FOR: ChainTokenList = {
-  [ChainId.MATIC]: [WETH, WMATIC[ChainId.MATIC], USDC, USDT, WBTC, TETU]
+  [ChainId.MATIC]: [WETH, WMATIC[ChainId.MATIC], USDC, USDT, WBTC, TETU],
+  [ChainId.FANTOM]: [WMATIC[ChainId.FANTOM], FANTOM_WETH, FANTOM_USDC, FANTOM_FUSDT, FANTOM_WBTC]
 }
 
 export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } = {
@@ -85,6 +99,20 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [DINO, USDC],
     [DAI, USDC],
     [KLIMA, USDC]
+  ],
+  [ChainId.FANTOM]: [
+    [FANTOM_USDC, FANTOM_FUSDT],
+    [FANTOM_USDC, FANTOM_WBTC],
+    [FANTOM_USDC, FANTOM_WETH],
+    [FANTOM_USDC, FANTOM_TETU],
+    [FANTOM_USDC, FANTOM_DAI],
+    [FANTOM_USDC, FANTOM_CRV],
+    [FANTOM_USDC, FANTOM_FUSD],
+    [FANTOM_USDC, FANTOM_LINK],
+    [FANTOM_USDC, FANTOM_FRAX],
+    [FANTOM_USDC, FANTOM_DOLA],
+    [FANTOM_USDC, FANTOM_MIM],
+    [FANTOM_USDC, FANTOM_TUSD]
   ]
 }
 
@@ -174,5 +202,19 @@ export const STATIC_PAIRS = new Map<string, string>([
   [USDC.address.toLowerCase() + miFARM.address.toLowerCase(), '0x6af88bD9f7288CF55B430C9AECC03849F2E7b791'],
   [USDC.address.toLowerCase() + ICE.address.toLowerCase(), '0x84D25fB747559c78314C26917A925C894116EA3C'],
   [USDC.address.toLowerCase() + DAI.address.toLowerCase(), '0x37799b48443751eBc0FD2cb4E3Ac119AD97d084b'],
-  [USDC.address.toLowerCase() + KLIMA.address.toLowerCase(), '0xD4Ed96a3EeCe1C7B7A8Fa8A762281e3ED5402f76']
+  [USDC.address.toLowerCase() + KLIMA.address.toLowerCase(), '0xD4Ed96a3EeCe1C7B7A8Fa8A762281e3ED5402f76'],
+
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_TETU.address.toLowerCase(), '0x371620F53C89d4c97e677506f0cfCf98EFcB1CF8'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_DAI.address.toLowerCase(), '0xFe7c6D25E235132ACBE74A20F012F068C5C0C5a3'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_WETH.address.toLowerCase(), '0xBDC1931A2cD902AA50941C01b13f8357B9Cf4FEb'],
+  [FANTOM_USDC.address.toLowerCase() + WMATIC[250].address.toLowerCase(), '0xbCb81b9f53Db2F76C46fff377f5a080d266a329F'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_WBTC.address.toLowerCase(), '0x4a10DB969596576b4905228A5ea315728A801021'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_FUSDT.address.toLowerCase(), '0xF0954496287F9B576146CC88374A2629CAC0a6fa'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_CRV.address.toLowerCase(), '0x6dB8BaC1ac430736F2a67b5475Ba3fC5B5098073'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_FUSD.address.toLowerCase(), '0x9e51985257c4f8C31A8772dfD12c2D721F8c4760'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_LINK.address.toLowerCase(), '0xED57796D11566e4b5a0FfB4f7B38f442A0863Ac8'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_FRAX.address.toLowerCase(), '0x9F963b39a9De1bd679F4350e17429277833B1aFD'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_DOLA.address.toLowerCase(), '0xab977C496338008761DA15476BaC282c4A174601'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_MIM.address.toLowerCase(), '0xD0abD42D4718960D353f3f5A6Ca727203857fdd9'],
+  [FANTOM_USDC.address.toLowerCase() + FANTOM_TUSD.address.toLowerCase(), '0x833C0A5312087Fee9127989E68664DE2b2B5640f']
 ])

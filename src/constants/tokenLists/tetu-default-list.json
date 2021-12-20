@@ -16,7 +16,7 @@
     {
       "chainId": 137,
       "address": "0x255707B70BF90aa112006E1b07B9AeA6De021424",
-      "name": "TETU Reward Token",
+      "name": "TETU",
       "symbol": "TETU",
       "decimals": 18,
       "logoURI": "https://assets.coingecko.com/coins/images/17882/small/gradient_icon_926.png"
@@ -100,6 +100,118 @@
       "decimals": 9,
       "chainId": 137,
       "logoURI": "https://raw.githubusercontent.com/sushiswap/logos/main/network/matic/0x4e78011Ce80ee02d2c3e649Fb657E45898257815.jpg"
+    },
+    {
+      "name": "Wrapped Fantom",
+      "address": "0x21be370D5312f44cB42ce377BC9b8a0cEF1A4C83",
+      "symbol": "WFTM",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/ftm.jpg"
+    },
+    {
+      "name": "Fantom USD",
+      "address": "0xAd84341756Bf337f5a0164515b1f6F993D194E1f",
+      "symbol": "fUSD",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/fusd.jpg"
+    },
+    {
+      "name": "ChainLink",
+      "address": "0xb3654dc3D10Ea7645f8319668E8F54d2574FBdC8",
+      "symbol": "LINK",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/link.jpg"
+    },
+    {
+      "name": "USD Coin",
+      "address": "0x04068DA6C83AFCFA0e13ba15A6696662335D5B75",
+      "symbol": "USDC",
+      "decimals": 6,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/usdc.jpg"
+    },
+    {
+      "name": "Wrapped Bitcoin",
+      "address": "0x321162Cd933E2Be498Cd2267a90534A804051b11",
+      "symbol": "WBTC",
+      "decimals": 8,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/wbtc.jpg"
+    },
+    {
+      "name": "Dai Stablecoin",
+      "address": "0x8D11eC38a3EB5E956B052f67Da8Bdc9bef8Abf3E",
+      "symbol": "DAI",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/dai.jpg"
+    },
+    {
+      "name": "Curve DAO",
+      "address": "0x1E4F97b9f9F913c46F1632781732927B9019C68b",
+      "symbol": "CRV",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/crv.jpg"
+    },
+    {
+      "name": "Frax",
+      "address": "0xaf319E5789945197e365E7f7fbFc56B130523B33",
+      "symbol": "FRAX",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/frax.jpg"
+    },
+    {
+      "name": "Wrapped Ether",
+      "address": "0x74b23882a30290451A17c44f4F05243b6b58C76d",
+      "symbol": "WETH",
+      "decimals": 18,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/eth.jpg"
+    },
+    {
+      "name": "Frapped USDT",
+      "address": "0x049d68029688eAbF473097a2fC38ef61633A3C7A",
+      "symbol": "fUSDT",
+      "decimals": 6,
+      "chainId": 250,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/usdt.jpg"
+    },
+    {
+      "address": "0x82f0B8B456c1A451378467398982d4834b6829c1",
+      "chainId": 250,
+      "name": "Magic Internet Money",
+      "symbol": "MIM",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/logos/main/network/fantom/0x82f0B8B456c1A451378467398982d4834b6829c1.jpg"
+    },
+    {
+      "address": "0x65c9d9d080714cDa7b5d58989Dc27f897F165179",
+      "chainId": 250,
+      "name": "TETU",
+      "symbol": "TETU",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/17882/small/gradient_icon_926.png"
+    },
+    {
+      "address": "0x3129662808bEC728a27Ab6a6b9AFd3cBacA8A43c",
+      "chainId": 250,
+      "name": "DOLA",
+      "symbol": "DOLA",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/14287/small/anchor-logo-1-200x200.png?1615275005"
+    },
+    {
+      "address": "0x9879aBDea01a879644185341F7aF7d8343556B7a",
+      "chainId": 250,
+      "name": "TUSD",
+      "symbol": "TUSD",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/3449/small/tusd.png?1618395665"
     }
   ]
 }

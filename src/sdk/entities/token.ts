@@ -57,5 +57,18 @@ export function currencyEquals(currencyA: Currency, currencyB: Currency): boolea
 }
 
 export const WMATIC = {
-  [ChainId.MATIC]: new Token(ChainId.MATIC, '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270', 18, 'WMATIC', 'Wrapped Matic')
+  [ChainId.MATIC]: new Token(
+    ChainId.MATIC,
+    '0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
+    18,
+    'WMATIC',
+    'Wrapped Matic'
+  ),
+  [ChainId.FANTOM]: new Token(
+    ChainId.FANTOM,
+    '0x21be370d5312f44cb42ce377bc9b8a0cef1a4c83',
+    18,
+    'WFTM',
+    'Wrapped Fantom'
+  )
 }
