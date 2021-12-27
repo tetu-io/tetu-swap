@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, MATIC, Percent, WMATIC } from '../../sdk'
+import {ChainId, Currency, currencyEquals, MATIC, Percent, WMATIC} from '../../sdk'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -99,7 +99,10 @@ export default function RemoveLiquidity({
 
   // allowance handling
   const [signatureData, setSignatureData] = useState<{ v: number; r: string; s: string; deadline: number } | null>(null)
-  const [approval, approveCallback] = useApproveCallback(parsedAmounts[Field.LIQUIDITY], ROUTER_ADDRESS)
+  const [approval, approveCallback] = useApproveCallback(
+    parsedAmounts[Field.LIQUIDITY],
+    ROUTER_ADDRESS[chainId as ChainId]
+  )
 
   async function onAttemptToApprove() {
     if (!pairContract || !pair || !library || !deadline) throw new Error('missing dependencies')
@@ -130,7 +133,7 @@ export default function RemoveLiquidity({
     ]
     const message = {
       owner: account,
-      spender: ROUTER_ADDRESS,
+      spender: ROUTER_ADDRESS[chainId as ChainId],
       value: liquidityAmount.raw.toString(),
       nonce: nonce.toHexString(),
       deadline: deadline.toNumber()
@@ -191,7 +194,7 @@ export default function RemoveLiquidity({
     if (!currencyAmountA || !currencyAmountB) {
       throw new Error('missing currency amounts')
     }
-    const router = getRouterContract(chainId, library, account)
+    const router = getRouterContract(chainId, library, account, chainId)
 
     const amountsMin = {
       [Field.CURRENCY_A]: calculateSlippageAmount(currencyAmountA, allowedSlippage)[0],

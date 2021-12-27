@@ -3,7 +3,10 @@ import {AbstractConnector} from '@web3-react/abstract-connector'
 
 import {injected} from '../connectors'
 
-export const ROUTER_ADDRESS = '0x121d1D47aC63fAF123b29E3267fa8feb1fADc65c'
+export const ROUTER_ADDRESS = {
+  [ChainId.MATIC]: '0x121d1D47aC63fAF123b29E3267fa8feb1fADc65c',
+  [ChainId.FANTOM]: '0xbd21EC4b56A50aBF3C52ca9977C26291632Ce5A6'
+}
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
 

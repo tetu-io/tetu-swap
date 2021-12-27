@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { Currency, currencyEquals, MATIC, TokenAmount, WMATIC } from '../../sdk'
+import { ChainId, Currency, currencyEquals, MATIC, TokenAmount, WMATIC } from '../../sdk'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -120,14 +120,20 @@ export default function AddLiquidity({
   )
 
   // check whether the user has approved the router on the tokens
-  const [approvalA, approveACallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_A], ROUTER_ADDRESS)
-  const [approvalB, approveBCallback] = useApproveCallback(parsedAmounts[Field.CURRENCY_B], ROUTER_ADDRESS)
+  const [approvalA, approveACallback] = useApproveCallback(
+    parsedAmounts[Field.CURRENCY_A],
+    ROUTER_ADDRESS[chainId as ChainId]
+  )
+  const [approvalB, approveBCallback] = useApproveCallback(
+    parsedAmounts[Field.CURRENCY_B],
+    ROUTER_ADDRESS[chainId as ChainId]
+  )
 
   const addTransaction = useTransactionAdder()
 
   async function onAdd() {
     if (!chainId || !library || !account) return
-    const router = getRouterContract(chainId, library, account)
+    const router = getRouterContract(chainId, library, account, chainId)
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
     if (!parsedAmountA || !parsedAmountB || !currencyA || !currencyB || !deadline) {
