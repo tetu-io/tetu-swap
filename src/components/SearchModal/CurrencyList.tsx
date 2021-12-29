@@ -1,4 +1,4 @@
-import { Currency, CurrencyAmount, currencyEquals, MATIC, Token } from '../../sdk'
+import { Currency, CurrencyAmount, currencyEquals, Token } from '../../sdk'
 import React, { CSSProperties, MutableRefObject, useCallback, useMemo } from 'react'
 import { FixedSizeList } from 'react-window'
 import { Text } from 'rebass'
@@ -23,7 +23,7 @@ import QuestionHelper from 'components/QuestionHelper'
 import useTheme from 'hooks/useTheme'
 
 function currencyKey(currency: Currency): string {
-  return currency instanceof Token ? currency.address : currency === MATIC ? 'ETHER' : ''
+  return currency instanceof Token ? currency.address : currency ? (currency.name as string) : ''
 }
 
 const StyledBalanceText = styled(Text)`
@@ -166,15 +166,15 @@ export default function CurrencyList({
   setImportToken: (token: Token) => void
   breakIndex: number | undefined
 }) {
+  const { chainId } = useActiveWeb3React()
   const itemData: (Currency | undefined)[] = useMemo(() => {
-    let formatted: (Currency | undefined)[] = showETH ? [Currency.MATIC, ...currencies] : currencies
+    const networkCoin = Currency.getNetworkCoinByEnum(chainId)
+    let formatted: (Currency | undefined)[] = showETH ? [networkCoin, ...currencies] : currencies
     if (breakIndex !== undefined) {
       formatted = [...formatted.slice(0, breakIndex), undefined, ...formatted.slice(breakIndex, formatted.length)]
     }
     return formatted
   }, [breakIndex, currencies, showETH])
-
-  const { chainId } = useActiveWeb3React()
   const theme = useTheme()
 
   const inactiveTokens: {

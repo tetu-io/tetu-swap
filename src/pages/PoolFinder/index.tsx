@@ -1,4 +1,4 @@
-import { Currency, MATIC, JSBI, TokenAmount } from '../../sdk'
+import { Currency, JSBI, TokenAmount } from '../../sdk'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Plus } from 'react-feather'
 import { Text } from 'rebass'
@@ -27,12 +27,12 @@ enum Fields {
 }
 
 export default function PoolFinder() {
-  const { account } = useActiveWeb3React()
-
+  const { account, chainId } = useActiveWeb3React()
+  const networkCoin = Currency.getNetworkCoinByEnum(chainId)
   const [showSearch, setShowSearch] = useState<boolean>(false)
   const [activeField, setActiveField] = useState<number>(Fields.TOKEN1)
 
-  const [currency0, setCurrency0] = useState<Currency | null>(MATIC)
+  const [currency0, setCurrency0] = useState<Currency | null>(networkCoin)
   const [currency1, setCurrency1] = useState<Currency | null>(null)
 
   const [pairState, pair] = usePair(currency0 ?? undefined, currency1 ?? undefined)

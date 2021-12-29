@@ -1,8 +1,9 @@
-import { Currency, MATIC, Token } from '../../sdk'
+import { Currency, MATIC, FTM, Token } from '../../sdk'
 import React, { useMemo } from 'react'
 import styled from 'styled-components'
 
 import MaticLogo from '../../assets/images/matic-logo-square.svg'
+import FtmLogo from '../../assets/images/FTM.png'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/hooks'
 import Logo from '../Logo'
@@ -37,7 +38,7 @@ export default function CurrencyLogo({
   const uriLocations = useHttpLocations(currency instanceof WrappedTokenInfo ? currency.logoURI : undefined)
 
   const srcs: string[] = useMemo(() => {
-    if (currency === MATIC) return []
+    if (Currency.isNetworkCoin(currency?.name)) return []
 
     if (currency instanceof Token) {
       if (currency instanceof WrappedTokenInfo) {
@@ -50,6 +51,8 @@ export default function CurrencyLogo({
 
   if (currency === MATIC) {
     return <StyledEthereumLogo src={MaticLogo} size={size} style={style} />
+  } else if (currency === FTM) {
+    return <StyledEthereumLogo src={FtmLogo} size={size} style={style} />
   }
 
   return <StyledLogo size={size} srcs={srcs} alt={`${currency?.symbol ?? 'token'} logo`} style={style} />

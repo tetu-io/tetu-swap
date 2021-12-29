@@ -1,12 +1,12 @@
 import React from 'react'
-import { Text } from 'rebass'
-import { ChainId, Currency, currencyEquals, MATIC, Token } from '../../sdk'
+import {Text} from 'rebass'
+import {ChainId, Currency, currencyEquals, Token} from '../../sdk'
 import styled from 'styled-components'
 
-import { SUGGESTED_BASES } from '../../constants'
-import { AutoColumn } from '../Column'
+import {SUGGESTED_BASES} from '../../constants'
+import {AutoColumn} from '../Column'
 import QuestionHelper from '../QuestionHelper'
-import { AutoRow } from '../Row'
+import {AutoRow} from '../Row'
 import CurrencyLogo from '../CurrencyLogo'
 
 const BaseWrapper = styled.div<{ disable?: boolean }>`
@@ -34,6 +34,7 @@ export default function CommonBases({
   selectedCurrency?: Currency | null
   onSelect: (currency: Currency) => void
 }) {
+  const networkCoin = Currency.getNetworkCoinByEnum(chainId)
   return (
     <AutoColumn gap="md">
       <AutoRow>
@@ -45,15 +46,15 @@ export default function CommonBases({
       <AutoRow gap="4px">
         <BaseWrapper
           onClick={() => {
-            if (!selectedCurrency || !currencyEquals(selectedCurrency, MATIC)) {
-              onSelect(MATIC)
+            if (!selectedCurrency || !currencyEquals(selectedCurrency, networkCoin)) {
+              onSelect(networkCoin)
             }
           }}
-          disable={selectedCurrency === MATIC}
+          disable={selectedCurrency === networkCoin}
         >
-          <CurrencyLogo currency={MATIC} style={{ marginRight: 8 }} />
+          <CurrencyLogo currency={networkCoin} style={{ marginRight: 8 }} />
           <Text fontWeight={500} fontSize={16}>
-            MATIC
+            {networkCoin.name}
           </Text>
         </BaseWrapper>
         {(chainId ? SUGGESTED_BASES[chainId] : []).map((token: Token) => {

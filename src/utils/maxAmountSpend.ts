@@ -1,4 +1,4 @@
-import { CurrencyAmount, MATIC, JSBI } from '../sdk'
+import { CurrencyAmount, JSBI, Currency } from '../sdk'
 import { MIN_ETH } from '../constants'
 
 /**
@@ -7,11 +7,11 @@ import { MIN_ETH } from '../constants'
  */
 export function maxAmountSpend(currencyAmount?: CurrencyAmount): CurrencyAmount | undefined {
   if (!currencyAmount) return undefined
-  if (currencyAmount.currency === MATIC) {
+  if (Currency.isNetworkCoin(currencyAmount.currency.name)) {
     if (JSBI.greaterThan(currencyAmount.raw, MIN_ETH)) {
-      return CurrencyAmount.ether(JSBI.subtract(currencyAmount.raw, MIN_ETH))
+      return CurrencyAmount.ether(JSBI.subtract(currencyAmount.raw, MIN_ETH), currencyAmount.chainId)
     } else {
-      return CurrencyAmount.ether(JSBI.BigInt(0))
+      return CurrencyAmount.ether(JSBI.BigInt(0), currencyAmount.chainId)
     }
   }
   return currencyAmount

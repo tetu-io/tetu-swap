@@ -1,7 +1,7 @@
 import { ChainId } from '../constants'
 import invariant from 'tiny-invariant'
 
-import { Currency, MATIC } from './currency'
+import { Currency } from './currency'
 import { Token, WMATIC } from './token'
 import { Pair } from './pair'
 import { Price } from './fractions/price'
@@ -13,7 +13,8 @@ export class Route {
   public readonly output: Currency
   public readonly midPrice: Price
 
-  public constructor(pairs: Pair[], input: Currency, output?: Currency) {
+  public constructor(pairs: Pair[], input: Currency, chainId: ChainId | undefined, output?: Currency) {
+    const networkCoin = Currency.getNetworkCoinByEnum(chainId)
     invariant(pairs.length > 0, 'PAIRS')
     invariant(
       pairs.every(pair => pair.chainId === pairs[0].chainId),
@@ -21,13 +22,13 @@ export class Route {
     )
     invariant(
       (input instanceof Token && pairs[0].involvesToken(input)) ||
-        (input === MATIC && pairs[0].involvesToken(WMATIC[pairs[0].chainId])),
+        (input === networkCoin && pairs[0].involvesToken(WMATIC[pairs[0].chainId])),
       'INPUT'
     )
     invariant(
       typeof output === 'undefined' ||
         (output instanceof Token && pairs[pairs.length - 1].involvesToken(output)) ||
-        (output === MATIC && pairs[pairs.length - 1].involvesToken(WMATIC[pairs[0].chainId])),
+        (output === networkCoin && pairs[pairs.length - 1].involvesToken(WMATIC[pairs[0].chainId])),
       'OUTPUT'
     )
 

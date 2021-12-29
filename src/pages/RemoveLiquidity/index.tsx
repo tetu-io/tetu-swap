@@ -1,7 +1,7 @@
 import { splitSignature } from '@ethersproject/bytes'
 import { Contract } from '@ethersproject/contracts'
 import { TransactionResponse } from '@ethersproject/providers'
-import {ChainId, Currency, currencyEquals, MATIC, Percent, WMATIC} from '../../sdk'
+import { ChainId, Currency, currencyEquals, Percent, WMATIC } from '../../sdk'
 import React, { useCallback, useContext, useMemo, useState } from 'react'
 import { ArrowDown, Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -51,6 +51,7 @@ export default function RemoveLiquidity({
 }: RouteComponentProps<{ currencyIdA: string; currencyIdB: string }>) {
   const [currencyA, currencyB] = [useCurrency(currencyIdA) ?? undefined, useCurrency(currencyIdB) ?? undefined]
   const { account, chainId, library } = useActiveWeb3React()
+  const networkCoin = Currency.getNetworkCoinByEnum(chainId)
   const [tokenA, tokenB] = useMemo(() => [wrappedCurrency(currencyA, chainId), wrappedCurrency(currencyB, chainId)], [
     currencyA,
     currencyB,
@@ -205,8 +206,8 @@ export default function RemoveLiquidity({
     const liquidityAmount = parsedAmounts[Field.LIQUIDITY]
     if (!liquidityAmount) throw new Error('missing liquidity amount')
 
-    const currencyBIsETH = currencyB === MATIC
-    const oneCurrencyIsETH = currencyA === MATIC || currencyBIsETH
+    const currencyBIsETH = currencyB === networkCoin
+    const oneCurrencyIsETH = currencyA === networkCoin || currencyBIsETH
 
     if (!tokenA || !tokenB) throw new Error('could not wrap')
 
@@ -424,7 +425,7 @@ export default function RemoveLiquidity({
     [onUserInput]
   )
 
-  const oneCurrencyIsETH = currencyA === MATIC || currencyB === MATIC
+  const oneCurrencyIsETH = currencyA === networkCoin || currencyB === networkCoin
   const oneCurrencyIsWETH = Boolean(
     chainId &&
       ((currencyA && currencyEquals(WMATIC[chainId], currencyA)) ||
@@ -568,8 +569,8 @@ export default function RemoveLiquidity({
                       <RowBetween style={{ justifyContent: 'flex-end' }}>
                         {oneCurrencyIsETH ? (
                           <StyledInternalLink
-                            to={`/remove/${currencyA === MATIC ? WMATIC[chainId].address : currencyIdA}/${
-                              currencyB === MATIC ? WMATIC[chainId].address : currencyIdB
+                            to={`/remove/${currencyA === networkCoin ? WMATIC[chainId].address : currencyIdA}/${
+                              currencyB === networkCoin ? WMATIC[chainId].address : currencyIdB
                             }`}
                           >
                             Receive WETH
@@ -577,8 +578,10 @@ export default function RemoveLiquidity({
                         ) : oneCurrencyIsWETH ? (
                           <StyledInternalLink
                             to={`/remove/${
-                              currencyA && currencyEquals(currencyA, WMATIC[chainId]) ? 'MATIC' : currencyIdA
-                            }/${currencyB && currencyEquals(currencyB, WMATIC[chainId]) ? 'MATIC' : currencyIdB}`}
+                              currencyA && currencyEquals(currencyA, WMATIC[chainId]) ? networkCoin.name : currencyIdA
+                            }/${
+                              currencyB && currencyEquals(currencyB, WMATIC[chainId]) ? networkCoin.name : currencyIdB
+                            }`}
                           >
                             Receive ETH
                           </StyledInternalLink>

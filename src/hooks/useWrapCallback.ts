@@ -1,4 +1,4 @@
-import { Currency, currencyEquals, MATIC, WMATIC } from '../sdk'
+import { Currency, currencyEquals, WMATIC } from '../sdk'
 import { useMemo } from 'react'
 import { tryParseAmount } from '../state/swap/hooks'
 import { useTransactionAdder } from '../state/transactions/hooks'
@@ -28,15 +28,15 @@ export default function useWrapCallback(
   const wethContract = useWETHContract()
   const balance = useCurrencyBalance(account ?? undefined, inputCurrency)
   // we can always parse the amount typed as the input currency, since wrapping is 1:1
-  const inputAmount = useMemo(() => tryParseAmount(typedValue, inputCurrency), [inputCurrency, typedValue])
+  const inputAmount = useMemo(() => tryParseAmount(chainId, typedValue, inputCurrency), [inputCurrency, typedValue])
   const addTransaction = useTransactionAdder()
 
   return useMemo(() => {
     if (!wethContract || !chainId || !inputCurrency || !outputCurrency) return NOT_APPLICABLE
 
     const sufficientBalance = inputAmount && balance && !balance.lessThan(inputAmount)
-
-    if (inputCurrency === MATIC && currencyEquals(WMATIC[chainId], outputCurrency)) {
+    const networkCoin = Currency.getNetworkCoinByEnum(chainId)
+    if (inputCurrency === networkCoin && currencyEquals(WMATIC[chainId], outputCurrency)) {
       return {
         wrapType: WrapType.WRAP,
         execute:
@@ -52,7 +52,7 @@ export default function useWrapCallback(
             : undefined,
         inputError: sufficientBalance ? undefined : 'Insufficient ETH balance'
       }
-    } else if (currencyEquals(WMATIC[chainId], inputCurrency) && outputCurrency === MATIC) {
+    } else if (currencyEquals(WMATIC[chainId], inputCurrency) && outputCurrency === networkCoin) {
       return {
         wrapType: WrapType.UNWRAP,
         execute:

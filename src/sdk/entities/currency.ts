@@ -1,7 +1,7 @@
 import JSBI from 'jsbi'
 
-import { SolidityType } from '../constants'
-import { validateSolidityTypeInstance } from '../utils'
+import {ChainId, SolidityType} from '../constants'
+import {validateSolidityTypeInstance} from '../utils'
 
 /**
  * A currency is any fungible financial instrument on Ethereum, including Ether and all ERC20 tokens.
@@ -16,7 +16,8 @@ export class Currency {
   /**
    * The only instance of the base class `Currency`.
    */
-  public static readonly MATIC: Currency = new Currency(18, 'MATIC', 'Matic')
+  public static readonly MATIC: Currency = new Currency(18, 'MATIC', 'MATIC')
+  public static readonly FTM: Currency = new Currency(18, 'FTM', 'FTM')
 
   /**
    * Constructs an instance of the base class `Currency`. The only instance of the base class `Currency` is `Currency.ETHER`.
@@ -31,7 +32,25 @@ export class Currency {
     this.symbol = symbol
     this.name = name
   }
+
+  public static getNetworkCoinByName(name: string | undefined) {
+    if (name?.toUpperCase() === 'MATIC') {
+      return Currency.MATIC
+    } else if (name?.toUpperCase() === 'FTM') {
+      return Currency.FTM
+    }
+    return Currency.MATIC
+  }
+
+  public static getNetworkCoinByEnum(chainId: ChainId | undefined) {
+    return chainId === ChainId.MATIC ? Currency.MATIC : chainId === ChainId.FANTOM ? Currency.FTM : Currency.MATIC
+  }
+
+  public static isNetworkCoin(currencyId: string | undefined): boolean {
+    return currencyId?.toUpperCase() === 'MATIC' || currencyId?.toUpperCase() === 'FTM'
+  }
 }
 
 const MATIC = Currency.MATIC
-export { MATIC }
+const FTM = Currency.FTM
+export { MATIC, FTM }

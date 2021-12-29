@@ -1,4 +1,4 @@
-import { ChainId } from '../../sdk'
+import { ChainId, Currency } from '../../sdk'
 import React from 'react'
 import { Text } from 'rebass'
 import { NavLink } from 'react-router-dom'
@@ -255,8 +255,9 @@ export default function Header() {
   const { account, chainId } = useActiveWeb3React()
   const { t } = useTranslation()
 
-  const userEthBalance = useETHBalances(account ? [account] : [])?.[account ?? '']
+  const userEthBalance = useETHBalances(chainId, account ? [account] : [])?.[account ?? '']
   const [darkMode, toggleDarkMode] = useDarkModeManager()
+  const coinName = Currency.getNetworkCoinByEnum(chainId).name
 
   return (
     <HeaderFrame>
@@ -301,7 +302,7 @@ export default function Header() {
           <AccountElement active={!!account} style={{ pointerEvents: 'auto' }}>
             {account && userEthBalance ? (
               <BalanceText style={{ flexShrink: 0 }} pl="0.75rem" pr="0.5rem" fontWeight={500}>
-                {userEthBalance?.toSignificant(4)} MATIC
+                {userEthBalance?.toSignificant(4)} {coinName}
               </BalanceText>
             ) : null}
             <Web3Status />

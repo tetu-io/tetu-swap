@@ -2,7 +2,7 @@ import invariant from 'tiny-invariant'
 
 import { ChainId, ONE, TradeType, ZERO } from '../constants'
 import { sortedInsert } from '../utils'
-import { Currency, MATIC } from './currency'
+import { Currency } from './currency'
 import { CurrencyAmount } from './fractions/currencyAmount'
 import { Fraction } from './fractions/fraction'
 import { Percent } from './fractions/percent'
@@ -88,14 +88,16 @@ export interface BestTradeOptions {
  * the input currency amount.
  */
 function wrappedAmount(currencyAmount: CurrencyAmount, chainId: ChainId): TokenAmount {
+  const networkCoin = Currency.getNetworkCoinByEnum(chainId)
   if (currencyAmount instanceof TokenAmount) return currencyAmount
-  if (currencyAmount.currency === MATIC) return new TokenAmount(WMATIC[chainId], currencyAmount.raw)
-  invariant(false, 'CURRENCY')
+  if (currencyAmount.currency === networkCoin) return new TokenAmount(WMATIC[chainId], currencyAmount.raw)
+  invariant(false, 'CURRENCY ' + currencyAmount.currency.name + ' ' + chainId + ' ' + networkCoin.name)
 }
 
 function wrappedCurrency(currency: Currency, chainId: ChainId): Token {
+  const networkCoin = Currency.getNetworkCoinByEnum(chainId)
   if (currency instanceof Token) return currency
-  if (currency === MATIC) return WMATIC[chainId]
+  if (currency === networkCoin) return WMATIC[chainId]
   invariant(false, 'CURRENCY')
 }
 
@@ -132,26 +134,31 @@ export class Trade {
    * The percent difference between the mid price before the trade and the trade execution price.
    */
   public readonly priceImpact: Percent
+  public readonly chainId: ChainId | undefined
 
   /**
    * Constructs an exact in trade with the given amount in and route
    * @param route route of the exact in trade
    * @param amountIn the amount being passed in
+   * @param chainId
    */
-  public static exactIn(route: Route, amountIn: CurrencyAmount): Trade {
-    return new Trade(route, amountIn, TradeType.EXACT_INPUT)
+  public static exactIn(route: Route, amountIn: CurrencyAmount, chainId: ChainId | undefined): Trade {
+    return new Trade(route, amountIn, TradeType.EXACT_INPUT, chainId)
   }
 
   /**
    * Constructs an exact out trade with the given amount out and route
    * @param route route of the exact out trade
    * @param amountOut the amount returned by the trade
+   * @param chainId
    */
-  public static exactOut(route: Route, amountOut: CurrencyAmount): Trade {
-    return new Trade(route, amountOut, TradeType.EXACT_OUTPUT)
+  public static exactOut(route: Route, amountOut: CurrencyAmount, chainId: ChainId | undefined): Trade {
+    return new Trade(route, amountOut, TradeType.EXACT_OUTPUT, chainId)
   }
 
-  public constructor(route: Route, amount: CurrencyAmount, tradeType: TradeType) {
+  public constructor(route: Route, amount: CurrencyAmount, tradeType: TradeType, chainId: ChainId | undefined) {
+    this.chainId = chainId
+    const networkCoin = Currency.getNetworkCoinByEnum(chainId)
     const amounts: TokenAmount[] = new Array(route.path.length)
     const nextPairs: Pair[] = new Array(route.pairs.length)
     if (tradeType === TradeType.EXACT_INPUT) {
@@ -179,14 +186,14 @@ export class Trade {
     this.inputAmount =
       tradeType === TradeType.EXACT_INPUT
         ? amount
-        : route.input === MATIC
-        ? CurrencyAmount.ether(amounts[0].raw)
+        : route.input === networkCoin
+        ? CurrencyAmount.ether(amounts[0].raw, amounts[0].chainId)
         : amounts[0]
     this.outputAmount =
       tradeType === TradeType.EXACT_OUTPUT
         ? amount
-        : route.output === MATIC
-        ? CurrencyAmount.ether(amounts[amounts.length - 1].raw)
+        : route.output === networkCoin
+        ? CurrencyAmount.ether(amounts[amounts.length - 1].raw, amounts[amounts.length - 1].chainId)
         : amounts[amounts.length - 1]
     this.executionPrice = new Price(
       this.inputAmount.currency,
@@ -194,15 +201,16 @@ export class Trade {
       this.inputAmount.raw,
       this.outputAmount.raw
     )
-    this.nextMidPrice = Price.fromRoute(new Route(nextPairs, route.input))
+    this.nextMidPrice = Price.fromRoute(new Route(nextPairs, route.input, chainId))
     this.priceImpact = computePriceImpact(route.midPrice, this.inputAmount, this.outputAmount)
   }
 
   /**
    * Get the minimum amount that must be received from this trade for the given slippage tolerance
    * @param slippageTolerance tolerance of unfavorable slippage from the execution price of this trade
+   * @param chainId
    */
-  public minimumAmountOut(slippageTolerance: Percent): CurrencyAmount {
+  public minimumAmountOut(slippageTolerance: Percent, chainId: ChainId | undefined): CurrencyAmount {
     invariant(!slippageTolerance.lessThan(ZERO), 'SLIPPAGE_TOLERANCE')
     if (this.tradeType === TradeType.EXACT_OUTPUT) {
       return this.outputAmount
@@ -213,15 +221,16 @@ export class Trade {
         .multiply(this.outputAmount.raw).quotient
       return this.outputAmount instanceof TokenAmount
         ? new TokenAmount(this.outputAmount.token, slippageAdjustedAmountOut)
-        : CurrencyAmount.ether(slippageAdjustedAmountOut)
+        : CurrencyAmount.ether(slippageAdjustedAmountOut, chainId)
     }
   }
 
   /**
    * Get the maximum amount in that can be spent via this trade for the given slippage tolerance
    * @param slippageTolerance tolerance of unfavorable slippage from the execution price of this trade
+   * @param chainId
    */
-  public maximumAmountIn(slippageTolerance: Percent): CurrencyAmount {
+  public maximumAmountIn(slippageTolerance: Percent, chainId: ChainId | undefined): CurrencyAmount {
     invariant(!slippageTolerance.lessThan(ZERO), 'SLIPPAGE_TOLERANCE')
     if (this.tradeType === TradeType.EXACT_INPUT) {
       return this.inputAmount
@@ -229,7 +238,7 @@ export class Trade {
       const slippageAdjustedAmountIn = new Fraction(ONE).add(slippageTolerance).multiply(this.inputAmount.raw).quotient
       return this.inputAmount instanceof TokenAmount
         ? new TokenAmount(this.inputAmount.token, slippageAdjustedAmountIn)
-        : CurrencyAmount.ether(slippageAdjustedAmountIn)
+        : CurrencyAmount.ether(slippageAdjustedAmountIn, chainId)
     }
   }
 
@@ -291,9 +300,10 @@ export class Trade {
         sortedInsert(
           bestTrades,
           new Trade(
-            new Route([...currentPairs, pair], originalAmountIn.currency, currencyOut),
+            new Route([...currentPairs, pair], originalAmountIn.currency, chainId, currencyOut),
             originalAmountIn,
-            TradeType.EXACT_INPUT
+            TradeType.EXACT_INPUT,
+            chainId
           ),
           maxNumResults,
           tradeComparator
@@ -379,9 +389,10 @@ export class Trade {
         sortedInsert(
           bestTrades,
           new Trade(
-            new Route([pair, ...currentPairs], currencyIn, originalAmountOut.currency),
+            new Route([pair, ...currentPairs], currencyIn, chainId, originalAmountOut.currency),
             originalAmountOut,
-            TradeType.EXACT_OUTPUT
+            TradeType.EXACT_OUTPUT,
+            chainId
           ),
           maxNumResults,
           tradeComparator

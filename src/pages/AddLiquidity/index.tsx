@@ -1,6 +1,6 @@
 import { BigNumber } from '@ethersproject/bignumber'
 import { TransactionResponse } from '@ethersproject/providers'
-import { ChainId, Currency, currencyEquals, MATIC, TokenAmount, WMATIC } from '../../sdk'
+import { ChainId, Currency, currencyEquals, TokenAmount, WMATIC } from '../../sdk'
 import React, { useCallback, useContext, useState } from 'react'
 import { Plus } from 'react-feather'
 import ReactGA from 'react-ga'
@@ -133,6 +133,7 @@ export default function AddLiquidity({
 
   async function onAdd() {
     if (!chainId || !library || !account) return
+    const networkCoin = Currency.getNetworkCoinByEnum(chainId)
     const router = getRouterContract(chainId, library, account, chainId)
 
     const { [Field.CURRENCY_A]: parsedAmountA, [Field.CURRENCY_B]: parsedAmountB } = parsedAmounts
@@ -149,8 +150,8 @@ export default function AddLiquidity({
       method: (...args: any) => Promise<TransactionResponse>,
       args: Array<string | string[] | number>,
       value: BigNumber | null
-    if (currencyA === MATIC || currencyB === MATIC) {
-      const tokenBIsETH = currencyB === MATIC
+    if (currencyA === networkCoin || currencyB === networkCoin) {
+      const tokenBIsETH = currencyB === networkCoin
       estimate = router.estimateGas.addLiquidityETH
       method = router.addLiquidityETH
       args = [
@@ -286,6 +287,7 @@ export default function AddLiquidity({
     },
     [currencyIdB, history, currencyIdA]
   )
+  const networkCoin = Currency.getNetworkCoinByEnum(chainId)
   const handleCurrencyBSelect = useCallback(
     (currencyB: Currency) => {
       const newCurrencyIdB = currencyId(currencyB)
@@ -296,7 +298,7 @@ export default function AddLiquidity({
           history.push(`/add/${newCurrencyIdB}`)
         }
       } else {
-        history.push(`/add/${currencyIdA ? currencyIdA : 'MATIC'}/${newCurrencyIdB}`)
+        history.push(`/add/${currencyIdA ? currencyIdA : networkCoin.name}/${newCurrencyIdB}`)
       }
     },
     [currencyIdA, history, currencyIdB]

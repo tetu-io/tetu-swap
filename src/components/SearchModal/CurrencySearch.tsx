@@ -1,27 +1,40 @@
-import { Currency, MATIC, Token } from '../../sdk'
-import React, { KeyboardEvent, RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react'
+import {Currency, FTM, MATIC, Token} from '../../sdk'
+import React, {
+  KeyboardEvent,
+  RefObject,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react'
 import ReactGA from 'react-ga'
-import { useTranslation } from 'react-i18next'
-import { FixedSizeList } from 'react-window'
-import { Text } from 'rebass'
-import { useActiveWeb3React } from '../../hooks'
-import { useAllTokens, useToken, useIsUserAddedToken, useFoundOnInactiveList } from '../../hooks/Tokens'
-import { CloseIcon, TYPE, ButtonText, IconWrapper } from '../../theme'
-import { isAddress } from '../../utils'
+import {useTranslation} from 'react-i18next'
+import {FixedSizeList} from 'react-window'
+import {Text} from 'rebass'
+import {useActiveWeb3React} from '../../hooks'
+import {
+  useAllTokens,
+  useFoundOnInactiveList,
+  useIsUserAddedToken,
+  useToken
+} from '../../hooks/Tokens'
+import {ButtonText, CloseIcon, IconWrapper, TYPE} from '../../theme'
+import {isAddress} from '../../utils'
 import Column from '../Column'
-import Row, { RowBetween, RowFixed } from '../Row'
+import Row, {RowBetween, RowFixed} from '../Row'
 import CommonBases from './CommonBases'
 import CurrencyList from './CurrencyList'
-import { filterTokens, useSortedTokensByQuery } from './filtering'
-import { useTokenComparator } from './sorting'
-import { PaddedColumn, SearchInput, Separator } from './styleds'
+import {filterTokens, useSortedTokensByQuery} from './filtering'
+import {useTokenComparator} from './sorting'
+import {PaddedColumn, SearchInput, Separator} from './styleds'
 import AutoSizer from 'react-virtualized-auto-sizer'
 import styled from 'styled-components'
 import useToggle from 'hooks/useToggle'
-import { useOnClickOutside } from 'hooks/useOnClickOutside'
+import {useOnClickOutside} from 'hooks/useOnClickOutside'
 import useTheme from 'hooks/useTheme'
 import ImportRow from './ImportRow'
-import { Edit } from 'react-feather'
+import {Edit} from 'react-feather'
 import useDebounce from 'hooks/useDebounce'
 
 const ContentWrapper = styled(Column)`
@@ -94,7 +107,13 @@ export function CurrencySearch({
 
   const showETH: boolean = useMemo(() => {
     const s = debouncedQuery.toLowerCase().trim()
-    return s === '' || s === 'm' || s === 'ma' || s === 'mat' || s === 'mati' || s === 'matic'
+    if (chainId === 137) {
+      return s === '' || s === 'm' || s === 'ma' || s === 'mat' || s === 'mati' || s === 'matic'
+    }
+    if (chainId === 250) {
+      return s === '' || s === 'f' || s === 'ft' || s === 'ftm'
+    }
+    return false
   }, [debouncedQuery])
 
   const tokenComparator = useTokenComparator(invertSearchOrder)
@@ -137,6 +156,8 @@ export function CurrencySearch({
         const s = debouncedQuery.toLowerCase().trim()
         if (s === 'matic') {
           handleCurrencySelect(MATIC)
+        } else if (s === 'ftm') {
+          handleCurrencySelect(FTM)
         } else if (filteredSortedTokens.length > 0) {
           if (
             filteredSortedTokens[0].symbol?.toLowerCase() === debouncedQuery.trim().toLowerCase() ||

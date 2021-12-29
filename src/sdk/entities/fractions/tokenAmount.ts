@@ -10,7 +10,7 @@ export class TokenAmount extends CurrencyAmount {
 
   // amount _must_ be raw, i.e. in the native representation
   public constructor(token: Token, amount: BigintIsh) {
-    super(token, amount)
+    super(token, amount, token.chainId)
     this.token = token
   }
 
