@@ -212,6 +212,22 @@
       "symbol": "TUSD",
       "decimals": 18,
       "logoURI": "https://assets.coingecko.com/coins/images/3449/small/tusd.png?1618395665"
+    },
+    {
+      "address": "0xa3Fa99A148fA48D14Ed51d610c367C61876997F1",
+      "chainId": 137,
+      "name": "miMATIC",
+      "symbol": "MAI",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/polygon/assets/0xa3Fa99A148fA48D14Ed51d610c367C61876997F1/logo.png"
+    },
+    {
+      "address": "0xdf9b4b57865b403e08c85568442f95c26b7896b0",
+      "chainId": 137,
+      "name": "Sunflower Farm",
+      "symbol": "SFF",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/22198/small/download.png"
     }
   ]
 }

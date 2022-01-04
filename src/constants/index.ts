@@ -28,6 +28,8 @@ export const miFARM = new Token(ChainId.MATIC, '0xab0b2ddB9C7e440fAc8E140A89c0db
 export const ICE = new Token(ChainId.MATIC, '0x4A81f8796e0c6Ad4877A51C86693B0dE8093F2ef', 18, 'ICE', 'ICE')
 export const DAI = new Token(ChainId.MATIC, '0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063', 18, 'DAI', 'DAI')
 export const KLIMA = new Token(ChainId.MATIC, '0x4e78011ce80ee02d2c3e649fb657e45898257815', 18, 'KLIMA', 'KLIMA')
+export const SFF = new Token(ChainId.MATIC, '0xdf9b4b57865b403e08c85568442f95c26b7896b0', 18, 'SFF', 'Sunflower Farm')
+export const MAI = new Token(ChainId.MATIC, '0xa3Fa99A148fA48D14Ed51d610c367C61876997F1', 18, 'MAI', 'miMATIC')
 
 // *** FANTOM
 export const FANTOM_USDC = new Token(ChainId.FANTOM, '0x04068da6c83afcfa0e13ba15a6696662335d5b75', 6, 'USDC', 'USD//C')
@@ -101,7 +103,9 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [WBTC, TETU],
     [DINO, USDC],
     [DAI, USDC],
-    [KLIMA, USDC]
+    [KLIMA, USDC],
+    [SFF, USDC],
+    [MAI, TETU]
   ],
   [ChainId.FANTOM]: [
     [FANTOM_USDC, FANTOM_FUSDT],
@@ -206,6 +210,8 @@ export const STATIC_PAIRS = new Map<string, string>([
   [USDC.address.toLowerCase() + ICE.address.toLowerCase(), '0x84D25fB747559c78314C26917A925C894116EA3C'],
   [USDC.address.toLowerCase() + DAI.address.toLowerCase(), '0x37799b48443751eBc0FD2cb4E3Ac119AD97d084b'],
   [USDC.address.toLowerCase() + KLIMA.address.toLowerCase(), '0xD4Ed96a3EeCe1C7B7A8Fa8A762281e3ED5402f76'],
+  [USDC.address.toLowerCase() + SFF.address.toLowerCase(), '0xef8cba4d2CAd1d5fa988EE4652aEC83a6a0Fe68b'],
+  [TETU.address.toLowerCase() + MAI.address.toLowerCase(), '0x17eA124785c7c63ea7DB96DC916e1a54FcC33Cc9'],
 
   [FANTOM_USDC.address.toLowerCase() + FANTOM_TETU.address.toLowerCase(), '0x371620F53C89d4c97e677506f0cfCf98EFcB1CF8'],
   [FANTOM_USDC.address.toLowerCase() + FANTOM_DAI.address.toLowerCase(), '0xFe7c6D25E235132ACBE74A20F012F068C5C0C5a3'],
