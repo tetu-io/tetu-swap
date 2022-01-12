@@ -150,7 +150,7 @@ export function MinimalPositionCard({ pair, showUnwrapped = false, border }: Pos
             <span role="img" aria-label="wizard-icon">
               ⭐️
             </span>{' '}
-            By adding liquidity you&apos;ll able to earn rewards on Tetu yield platform
+            By adding liquidity you&apos;ll be able to earn rewards on Tetu yield platform
           </TYPE.subHeader>
         </LightCard>
       )}
