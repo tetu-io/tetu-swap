@@ -4,8 +4,8 @@ import {AbstractConnector} from '@web3-react/abstract-connector'
 import {injected} from '../connectors'
 
 export const ROUTER_ADDRESS = {
-  [ChainId.MATIC]: '0x121d1D47aC63fAF123b29E3267fa8feb1fADc65c',
-  [ChainId.FANTOM]: '0xbd21EC4b56A50aBF3C52ca9977C26291632Ce5A6'
+  [ChainId.MATIC]: '0x736FD9EabB15776A3adfea1B975c868F72A29d14',
+  [ChainId.FANTOM]: '0x1c7F7210a7ACc13d26824A8267cf9CA5D4020Bc1'
 }
 
 export const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000'
