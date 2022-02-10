@@ -215,7 +215,7 @@ export const STATIC_PAIRS = new Map<string, string>([
   [USDC.address.toLowerCase() + KLIMA.address.toLowerCase(), '0xD4Ed96a3EeCe1C7B7A8Fa8A762281e3ED5402f76'],
   [USDC.address.toLowerCase() + SFF.address.toLowerCase(), '0xef8cba4d2CAd1d5fa988EE4652aEC83a6a0Fe68b'],
   [TETU.address.toLowerCase() + MAI.address.toLowerCase(), '0x17eA124785c7c63ea7DB96DC916e1a54FcC33Cc9'],
-  [QI.address.toLowerCase() + tetuQI.address.toLowerCase(), '0xBCDd0E38F759F8C07D8416dF15D0B3e0F9146d08'],
+  [tetuQI.address.toLowerCase() + QI.address.toLowerCase(), '0xBCDd0E38F759F8C07D8416dF15D0B3e0F9146d08'],
 
   [FANTOM_USDC.address.toLowerCase() + FANTOM_TETU.address.toLowerCase(), '0x371620F53C89d4c97e677506f0cfCf98EFcB1CF8'],
   [FANTOM_USDC.address.toLowerCase() + FANTOM_DAI.address.toLowerCase(), '0xFe7c6D25E235132ACBE74A20F012F068C5C0C5a3'],
