@@ -228,6 +228,22 @@
       "symbol": "SFF",
       "decimals": 18,
       "logoURI": "https://assets.coingecko.com/coins/images/22198/small/download.png"
+    },
+    {
+      "address": "0x580A84C73811E1839F75d86d75d88cCa0c241fF4",
+      "chainId": 137,
+      "name": "Qi Dao",
+      "symbol": "QI",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/sushiswap/icons/master/token/qi.jpg"
+    },
+    {
+      "address": "0x4Cd44ced63d9a6FEF595f6AD3F7CED13fCEAc768",
+      "chainId": 137,
+      "name": "Staked Qi",
+      "symbol": "tetuQI",
+      "decimals": 18,
+      "logoURI": "https://raw.githubusercontent.com/tetu-io/tetu-brand-assets/master/token_icons/tetuQix6.png"
     }
   ]
 }
