@@ -3,7 +3,6 @@ import tetuAssetIcon from '../../assets/svg/xTETU.svg'
 import styled from 'styled-components'
 import { formatUnits } from 'ethers/lib/utils'
 import Web3 from 'web3'
-import { useHistory } from 'react-router-dom'
 
 export const ContractReaderAbi = [{
     inputs: [],
@@ -44,8 +43,6 @@ const TetuIcon = styled.img`
 export const TetuPrice = () => {  
   const [price, setPrice] = useState<null | string>(null)
 
-  const history = useHistory()
-
   useEffect(() => {
     const web3 = new Web3('https://polygon-rpc.com/')
     const contractReaderAddr = '0xCa9C8Fba773caafe19E6140eC0A7a54d996030Da'
@@ -64,19 +61,16 @@ export const TetuPrice = () => {
 
   const isLoading = price == null
 
-  console.log('history', history)
-
   // const handleClick = () => {
-  //    history.push(`/add/${newCurrencyIdA}/${currencyIdB}`)
-  //    //  href='https://swap.tetu.io/#/swap?inputCurrency=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&outputCurrency=0x255707B70BF90aa112006E1b07B9AeA6De021424'
+  //   document.location.replace('https://swap.tetu.io/#/swap?inputCurrency=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&outputCurrency=0x255707B70BF90aa112006E1b07B9AeA6De021424')
   // }
 
   return (
     <div>
-       <Wrapper>
+      <Wrapper href="https://www.coingecko.com/en/coins/tetu" target="_blank">
         <TetuIcon src={tetuAssetIcon} />
          {isLoading ? '...' : '$' + parseFloat(parseFloat(price!).toFixed(4))}
-       </Wrapper>
+      </Wrapper>
     </div>
   )
 }
