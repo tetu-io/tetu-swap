@@ -14,7 +14,7 @@ export const ContractReaderAbi = [{
   }];
 
 
-const Wrapper = styled.button`
+const Wrapper = styled.a`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -43,6 +43,7 @@ const TetuIcon = styled.img`
 
 export const TetuPrice = () => {  
   const [price, setPrice] = useState<null | string>(null)
+
   const history = useHistory()
 
   useEffect(() => {
@@ -63,13 +64,16 @@ export const TetuPrice = () => {
 
   const isLoading = price == null
 
-  const handleClick = () => {
-    // history.push(`/add/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174/0x255707B70BF90aa112006E1b07B9AeA6De021424`)
-  }
+  console.log('history', history)
+
+  // const handleClick = () => {
+  //    history.push(`/add/${newCurrencyIdA}/${currencyIdB}`)
+  //    //  href='https://swap.tetu.io/#/swap?inputCurrency=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&outputCurrency=0x255707B70BF90aa112006E1b07B9AeA6De021424'
+  // }
 
   return (
     <div>
-       <Wrapper onClick={handleClick}>
+       <Wrapper>
         <TetuIcon src={tetuAssetIcon} />
          {isLoading ? '...' : '$' + parseFloat(parseFloat(price!).toFixed(4))}
        </Wrapper>
