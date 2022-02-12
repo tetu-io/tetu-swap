@@ -64,7 +64,7 @@ export const TetuPrice = () => {
   const isLoading = price == null
 
   const handleClick = () => {
-    // history.push(`/add/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174/0x255707B70BF90aa112006E1b07B9AeA6De021424`)
+    history.push(`/add/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174/0x255707B70BF90aa112006E1b07B9AeA6De021424`)
   }
 
   return (
