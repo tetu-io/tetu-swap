@@ -3,6 +3,7 @@ import tetuAssetIcon from '../../assets/svg/xTETU.svg'
 import styled from 'styled-components'
 import { formatUnits } from 'ethers/lib/utils'
 import Web3 from 'web3'
+import { useIsDarkMode } from 'state/user/hooks'
 
 export const ContractReaderAbi = [{
     inputs: [],
@@ -13,7 +14,7 @@ export const ContractReaderAbi = [{
   }];
 
 
-const Wrapper = styled.a`
+const Wrapper = styled.a<{ darkMode: boolean}>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -24,9 +25,8 @@ const Wrapper = styled.a`
   border: 1px solid #686df1;
   box-shadow: inset 0px 0px 8px rgb(255 255 255 / 15%);
   background-color: transparent;
-  color: #fff;
+  color: ${({ darkMode }) => darkMode ? ' #fff' : '#000' };
   text-decoration: none;
-
   &:hover {
     border: 1px solid #04a8f0 !important;
     box-shadow: inset 0px 0px 8px rgb(255 255 255 / 25%);
@@ -42,6 +42,7 @@ const TetuIcon = styled.img`
 
 export const TetuPrice = () => {  
   const [price, setPrice] = useState<null | string>(null)
+  const darkMode = useIsDarkMode()
 
   useEffect(() => {
     const web3 = new Web3('https://polygon-rpc.com/')
@@ -67,7 +68,7 @@ export const TetuPrice = () => {
 
   return (
     <div>
-      <Wrapper href="https://www.coingecko.com/en/coins/tetu" target="_blank">
+      <Wrapper href="https://www.coingecko.com/en/coins/tetu" target="_blank" darkMode={darkMode}>
         <TetuIcon src={tetuAssetIcon} />
          {isLoading ? '...' : '$' + parseFloat(parseFloat(price!).toFixed(4))}
       </Wrapper>
