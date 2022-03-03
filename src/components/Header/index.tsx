@@ -20,6 +20,7 @@ import Menu from '../Menu'
 import Row, { RowFixed } from '../Row'
 import Web3Status from '../Web3Status'
 import { ExternalLink } from '../../theme'
+import { TetuPrice } from './TetuPrice'
 
 const HeaderFrame = styled.div`
   display: grid;
@@ -294,6 +295,7 @@ export default function Header() {
       </HeaderRow>
       <HeaderControls>
         <HeaderElement>
+          <TetuPrice />
           <HideSmall>
             {chainId && NETWORK_LABELS[chainId] && (
               <NetworkCard title={NETWORK_LABELS[chainId]}>{NETWORK_LABELS[chainId]}</NetworkCard>

@@ -36,3 +36,4 @@ cypress/fixtures/example.json
 .env
 .env.production
 .env.local
+.history
