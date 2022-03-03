@@ -32,6 +32,7 @@ export const SFF = new Token(ChainId.MATIC, '0xdf9b4b57865b403e08c85568442f95c26
 export const MAI = new Token(ChainId.MATIC, '0xa3Fa99A148fA48D14Ed51d610c367C61876997F1', 18, 'MAI', 'miMATIC')
 export const QI = new Token(ChainId.MATIC, '0x580A84C73811E1839F75d86d75d88cCa0c241fF4', 18, 'QI', 'Qi Dao')
 export const tetuQI = new Token(ChainId.MATIC, '0x4Cd44ced63d9a6FEF595f6AD3F7CED13fCEAc768', 18, 'tetuQi', 'Staked Qi')
+export const UNT = new Token(ChainId.MATIC, '0xc46DB78Be28B5F2461097ed9e3Fcc92E9FF8676d', 18, 'UNT', 'Universe Token')
 
 // *** FANTOM
 export const FANTOM_USDC = new Token(ChainId.FANTOM, '0x04068da6c83afcfa0e13ba15a6696662335d5b75', 6, 'USDC', 'USD//C')
@@ -108,7 +109,8 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [KLIMA, USDC],
     [SFF, USDC],
     [MAI, TETU],
-    [QI, tetuQI]
+    [QI, tetuQI],
+    [UNT, TETU]
   ],
   [ChainId.FANTOM]: [
     [FANTOM_USDC, FANTOM_FUSDT],
@@ -216,6 +218,7 @@ export const STATIC_PAIRS = new Map<string, string>([
   [USDC.address.toLowerCase() + SFF.address.toLowerCase(), '0xef8cba4d2CAd1d5fa988EE4652aEC83a6a0Fe68b'],
   [TETU.address.toLowerCase() + MAI.address.toLowerCase(), '0x17eA124785c7c63ea7DB96DC916e1a54FcC33Cc9'],
   [tetuQI.address.toLowerCase() + QI.address.toLowerCase(), '0xBCDd0E38F759F8C07D8416dF15D0B3e0F9146d08'],
+  [TETU.address.toLowerCase() + UNT.address.toLowerCase(), '0xe8F56B590ea274d5D451F786c3270af764F1b793'],
 
   [FANTOM_USDC.address.toLowerCase() + FANTOM_TETU.address.toLowerCase(), '0x371620F53C89d4c97e677506f0cfCf98EFcB1CF8'],
   [FANTOM_USDC.address.toLowerCase() + FANTOM_DAI.address.toLowerCase(), '0xFe7c6D25E235132ACBE74A20F012F068C5C0C5a3'],
