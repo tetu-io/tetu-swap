@@ -68,7 +68,7 @@ export const MERKLE_DISTRIBUTOR_ADDRESS: { [chainId in ChainId]?: string } = {}
 
 // used to construct intermediary pairs for trading
 export const BASES_TO_CHECK_TRADES_AGAINST: ChainTokenList = {
-  [ChainId.MATIC]: [WMATIC[ChainId.MATIC], WETH, USDC, USDT, WBTC],
+  [ChainId.MATIC]: [WMATIC[ChainId.MATIC], WETH, USDC, USDT, WBTC, TETU],
   [ChainId.FANTOM]: [WMATIC[ChainId.FANTOM], FANTOM_WETH, FANTOM_USDC, FANTOM_FUSDT, FANTOM_WBTC]
 }
 
