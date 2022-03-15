@@ -288,7 +288,10 @@ export default function Header() {
           <StyledExternalLink id={`stake-nav-link`} href={'https://app.tetu.io'}>
             Main DApp <span style={{ fontSize: '11px' }}>↗</span>
           </StyledExternalLink>
-          <StyledExternalLink id={`stake-nav-link`} href={'https://swap-info.tetu.io'}>
+          <StyledExternalLink
+            id={`stake-nav-link`}
+            href={chainId === ChainId.FANTOM ? 'https://swap-info-ftm.tetu.io' : 'https://swap-info.tetu.io'}
+          >
             Charts <span style={{ fontSize: '11px' }}>↗</span>
           </StyledExternalLink>
         </HeaderLinks>
