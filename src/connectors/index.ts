@@ -1,7 +1,7 @@
 import { Web3Provider } from '@ethersproject/providers'
 import { InjectedConnector } from '@web3-react/injected-connector'
 import { PortisConnector } from '@web3-react/portis-connector'
-
+import { WalletConnectConnector } from '@web3-react/walletconnect-connector'
 import { FortmaticConnector } from './Fortmatic'
 import { NetworkConnector } from './NetworkConnector'
 
@@ -38,4 +38,13 @@ export const fortmatic = new FortmaticConnector({
 export const portis = new PortisConnector({
   dAppId: PORTIS_ID ?? '',
   networks: [1]
+})
+
+export const walletconnect = new WalletConnectConnector({
+  supportedChainIds: [137, 250],
+  rpc: {
+    137: 'https://polygon-rpc.com/',
+    250: 'https://rpc.ftm.tools/'
+  },
+  qrcode: true
 })

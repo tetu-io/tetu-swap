@@ -181,6 +181,7 @@ export default function WalletModal({
 
     connector &&
       activate(connector, undefined, true).catch(error => {
+
         if (error instanceof UnsupportedChainIdError) {
           activate(connector) // a little janky...can't use setError because the connector isn't set
         } else {
@@ -199,6 +200,7 @@ export default function WalletModal({
   // get wallets user can switch too, depending on device/browser
   function getOptions() {
     const isMetamask = window.ethereum && window.ethereum.isMetaMask
+
     return Object.keys(SUPPORTED_WALLETS).map(key => {
       const option = SUPPORTED_WALLETS[key]
       // check for mobile options
@@ -329,7 +331,7 @@ export default function WalletModal({
           </HeaderRow>
         ) : (
           <HeaderRow>
-            <HoverText>Connect to a wallet</HoverText>
+            <HoverText>Connect to a wallet 123</HoverText>
           </HeaderRow>
         )}
         <ContentWrapper>
