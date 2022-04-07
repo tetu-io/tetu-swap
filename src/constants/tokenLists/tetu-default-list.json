@@ -260,6 +260,14 @@
       "symbol": "UMA",
       "decimals": 18,
       "logoURI": "https://raw.githubusercontent.com/sushiswap/assets/master/blockchains/polygon/assets/0x3066818837c5e6eD6601bd5a91B0762877A6B731/logo.png"
+    },
+    {
+      "address": "0xc250e9987a032acac293d838726c511e6e1c029d",
+      "chainId": 137,
+      "name": "Otter Clam",
+      "symbol": "CLAM",
+      "decimals": 18,
+      "logoURI": "https://assets.coingecko.com/coins/images/20670/small/clam.png"
     }
   ]
 }
