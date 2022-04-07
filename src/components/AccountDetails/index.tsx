@@ -344,7 +344,8 @@ export default function AccountDetails({
                             href={chainId && getEtherscanLink(chainId, ENSName, 'address')}
                           >
                             <LinkIcon size={16} />
-                            <span style={{ marginLeft: '4px' }}>View on Polygonscan</span>
+                            {chainId === 137 && <span style={{ marginLeft: '4px' }}>View on Polygonscan</span>}
+                            {chainId === 250 && <span style={{ marginLeft: '4px' }}>View on Fantomscan</span>}
                           </AddressLink>
                         )}
                       </div>
@@ -366,7 +367,8 @@ export default function AccountDetails({
                             href={getEtherscanLink(chainId, account, 'address')}
                           >
                             <LinkIcon size={16} />
-                            <span style={{ marginLeft: '4px' }}>View on Polygonscan</span>
+                            {chainId === 137 && <span style={{ marginLeft: '4px' }}>View on Polygonscan</span>}
+                            {chainId === 250 && <span style={{ marginLeft: '4px' }}>View on Fantomscan</span>}
                           </AddressLink>
                         )}
                       </div>
