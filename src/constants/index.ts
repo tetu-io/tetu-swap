@@ -115,7 +115,8 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [UNT, TETU],
     [USDC, UMA],
     [MAI, CLAM],
-    [USDC, MAI]
+    [USDC, MAI],
+    [USDC, QI]
   ],
   [ChainId.FANTOM]: [
     [FANTOM_USDC, FANTOM_FUSDT],
