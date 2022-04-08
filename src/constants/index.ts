@@ -114,7 +114,8 @@ export const PINNED_PAIRS: { readonly [chainId in ChainId]?: [Token, Token][] } 
     [QI, tetuQI],
     [UNT, TETU],
     [USDC, UMA],
-    [MAI, CLAM]
+    [MAI, CLAM],
+    [USDC, MAI]
   ],
   [ChainId.FANTOM]: [
     [FANTOM_USDC, FANTOM_FUSDT],
@@ -234,6 +235,8 @@ export const STATIC_PAIRS = new Map<string, string>([
   [TETU.address.toLowerCase() + UNT.address.toLowerCase(), '0xe8F56B590ea274d5D451F786c3270af764F1b793'],
   [USDC.address.toLowerCase() + UMA.address.toLowerCase(), '0xabca7538233cbe69709c004c52dc37e61c03796b'],
   [MAI.address.toLowerCase() + CLAM.address.toLowerCase(), '0xf8cc463a49c71bcd603db760584b6c9766dd65fd'],
+  [USDC.address.toLowerCase() + MAI.address.toLowerCase(), '0x7434b6039327bd43633d8d8d240e069b9de72588'],
+  [USDC.address.toLowerCase() + QI.address.toLowerCase(), '0xF1B432fea14DB8dc435B7F46EFF175dF575F0901'],
 
   [FANTOM_USDC.address.toLowerCase() + FANTOM_TETU.address.toLowerCase(), '0x371620F53C89d4c97e677506f0cfCf98EFcB1CF8'],
   [FANTOM_USDC.address.toLowerCase() + FANTOM_DAI.address.toLowerCase(), '0xFe7c6D25E235132ACBE74A20F012F068C5C0C5a3'],
