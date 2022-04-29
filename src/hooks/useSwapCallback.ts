@@ -1,12 +1,12 @@
 // import { BigNumber } from '@ethersproject/bignumber'
-import { Contract } from '@ethersproject/contracts'
-import { JSBI, Percent, Router, SwapParameters, Trade, TradeType } from '../sdk'
-import { useMemo } from 'react'
-import { BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE } from '../constants'
-import { useTransactionAdder } from '../state/transactions/hooks'
-import { getRouterContract, isAddress, shortenAddress } from '../utils'
+import {Contract} from '@ethersproject/contracts'
+import {JSBI, Percent, Router, SwapParameters, Trade, TradeType} from '../sdk'
+import {useMemo} from 'react'
+import {BIPS_BASE, INITIAL_ALLOWED_SLIPPAGE, TAXABLE_TOKENS} from '../constants'
+import {useTransactionAdder} from '../state/transactions/hooks'
+import {getRouterContract, isAddress, shortenAddress} from '../utils'
 import isZero from '../utils/isZero'
-import { useActiveWeb3React } from './index'
+import {useActiveWeb3React} from './index'
 import useTransactionDeadline from './useTransactionDeadline'
 import useENS from './useENS'
 
@@ -32,6 +32,10 @@ interface SwapCall {
 // }
 
 // type EstimatedSwapCall = SuccessfulCall | FailedCall
+
+function isTaxable(trade: Trade) {
+  return TAXABLE_TOKENS.has(trade.route.path[0].address.toLowerCase()) || TAXABLE_TOKENS.has(trade.route.path[trade.route.path.length - 1].address.toLowerCase())
+}
 
 /**
  * Returns the swap calls that can be used to make the trade
@@ -60,9 +64,13 @@ function useSwapCallArguments(
 
     const swapMethods = []
 
+    if (isTaxable(trade)) {
+      allowedSlippage = allowedSlippage + INITIAL_ALLOWED_SLIPPAGE * 60
+    }
+
     swapMethods.push(
       Router.swapCallParameters(trade, {
-        feeOnTransfer: false,
+        feeOnTransfer: isTaxable(trade) ? true : false,
         allowedSlippage: new Percent(JSBI.BigInt(allowedSlippage), BIPS_BASE),
         recipient,
         deadline: deadline.toNumber()

@@ -211,6 +211,8 @@ export const ONE_HUNDRED_PERCENT = new Percent('1')
 // SDN OFAC addresses
 export const BLOCKED_ADDRESSES: string[] = []
 
+export const TAXABLE_TOKENS: Set<string> = new Set<string>([SPHERE.address.toLowerCase()]);
+
 export const STATIC_PAIRS = new Map<string, string>([
   [USDC.address.toLowerCase() + USDT.address.toLowerCase(), '0x0A1970792114AAa40611B95988b24644583E7d3C'],
   [TETU.address.toLowerCase() + USDC.address.toLowerCase(), '0x80fF4e4153883d770204607eb4aF9994739C72DC'],
